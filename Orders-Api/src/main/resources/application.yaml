@@ -1,6 +1,9 @@
 spring:
   application:
     name: Orders-Api
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
   kafka:
     bootstrap-servers: localhost:29092
     producer:

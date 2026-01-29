@@ -2,7 +2,7 @@ package br.tec.itlabs.orders.api.controller;
 
 import br.tec.itlabs.orders.api.dto.CreateOrderRequest;
 import br.tec.itlabs.orders.api.messaging.OrdersProducer;
-import br.tec.itlabs.orders.worker.dto.OrderCreatedEvent;
+import br.tec.itlabs.orders.api.dto.OrderCreatedEvent;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

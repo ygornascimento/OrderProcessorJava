@@ -1,6 +1,7 @@
 package br.tec.itlabs.orders.api.config;
 
-import br.tec.itlabs.orders.worker.dto.OrderCreatedEvent;
+import br.tec.itlabs.orders.api.dto.OrderCreatedEvent;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -15,16 +16,22 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
 
+    private final ObjectMapper objectMapper;
+
+    public KafkaProducerConfig(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     @Bean
     public ProducerFactory<String, OrderCreatedEvent> producerFactory(KafkaProperties properties) {
 
         Map<String, Object> props = new HashMap<>(properties.buildProducerProperties());
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
-        props.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
+        JsonSerializer<OrderCreatedEvent> valueSerializer = new JsonSerializer<>(objectMapper);
+        valueSerializer.setAddTypeInfo(false);
 
-        return new DefaultKafkaProducerFactory<>(props);
+        return new DefaultKafkaProducerFactory<>(props, new StringSerializer(), valueSerializer);
     }
 
     @Bean

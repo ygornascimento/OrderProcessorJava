@@ -1,4 +1,4 @@
-package br.tec.itlabs.orders.worker.dto;
+package br.tec.itlabs.orders.api.dto;
 
 import java.math.BigDecimal;
 import java.time.Instant;

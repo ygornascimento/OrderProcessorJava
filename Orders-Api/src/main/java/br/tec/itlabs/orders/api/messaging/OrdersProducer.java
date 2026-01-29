@@ -1,6 +1,6 @@
 package br.tec.itlabs.orders.api.messaging;
 
-import br.tec.itlabs.orders.worker.dto.OrderCreatedEvent;
+import br.tec.itlabs.orders.api.dto.OrderCreatedEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
