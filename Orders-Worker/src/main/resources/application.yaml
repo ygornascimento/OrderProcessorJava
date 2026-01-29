@@ -1,3 +1,28 @@
 spring:
   application:
     name: Orders-Worker
+  datasource:
+    url: jdbc:mysql://localhost:3306/orders?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+server:
+  port: 8081
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: orders-worker
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
