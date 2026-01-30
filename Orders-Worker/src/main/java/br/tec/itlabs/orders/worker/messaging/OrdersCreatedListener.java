@@ -18,8 +18,7 @@ public class OrdersCreatedListener {
     }
 
     @KafkaListener(
-            topics = "${app.kafka.topics.order-created}",
-            groupId = "${spring.kafka.consumer.group-id}")
+            topics = "${app.kafka.topics.order-created}", containerFactory = "kafkaListenerContainerFactory")
     public void onMessage(OrderCreatedEvent event, Acknowledgment ack) {
         try {
             OrderEntity entity = new OrderEntity(

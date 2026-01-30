@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
-@Table
+@Table(name = "orders")
 public class OrderEntity {
 
     @Id
-    @Column(length = 36, nullable = false)
+    @Column(name = "id", length = 36, nullable = false, columnDefinition = "char(36)")
     private String id;
 
     @Column(name = "customer_name", nullable = false, length = 200)
